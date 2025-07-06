@@ -1,6 +1,5 @@
 import { renderMedia, selectComposition } from "@remotion/renderer";
 import express from "express";
-import { bundle } from "@remotion/bundler";
 import fs from "fs/promises";
 import path from "path";
 
@@ -18,12 +17,8 @@ app.post("/render", async (req, res) => {
       return;
     }
 
-    const serveUrl = await bundle({
-      entryPoint: "./src/index.ts",
-    });
-
     const composition = await selectComposition({
-      serveUrl,
+      serveUrl: "./build",
       id: compositionId,
       inputProps,
     });
@@ -33,7 +28,7 @@ app.post("/render", async (req, res) => {
       inputProps,
       codec: "h264",
       outputLocation,
-      serveUrl,
+      serveUrl: "./build",
     });
     console.log("Render finished.");
     const fileBuffer = await fs.readFile(outputLocation);

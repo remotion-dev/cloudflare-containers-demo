@@ -1,5 +1,5 @@
 FROM node:24-bookworm-slim
-# Install Chrome dependencies
+
 RUN apt-get update
 RUN apt install -y \
   libnss3 \
@@ -16,16 +16,17 @@ RUN apt install -y \
   libpango-1.0-0 \
   libcairo2 \
   libcups2
-# Copy everything from your project to the Docker image. Adjust if needed.
+
 COPY package.json package*.json yarn.lock* pnpm-lock.yaml* bun.lockb* bun.lock* tsconfig.json* remotion.config.* ./
 COPY src ./src
-# If you have a public folder:
+
 COPY public ./public
-# Install the right package manager and dependencies
+
 RUN npm i
-# Install Chrome
+
 RUN npx remotion browser ensure
-# The command to start the server
+RUN npx remotion bundle
+
 CMD ["node", "--experimental-strip-types", "src/server.ts"]
 
 EXPOSE 8080

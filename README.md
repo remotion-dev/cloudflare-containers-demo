@@ -33,6 +33,11 @@ Step 2: Add your Cloudflare credentials to `wrangler.toml`:
 R2_BUCKET_NAME = "cloudflare-container-service"
 # How to find your Cloudflare account ID: https://developers.cloudflare.com/fundamentals/account/find-account-and-zone-ids/#users-with-a-single-account
 CLOUDFLARE_ACCOUNT_ID = "2fe488b3b0f4deee223aef7464784c46"
+
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "cloudflare-container-service"
+preview_bucket_name = "cloudflare-container-service"
 ```
 
 Step 3: Generate the types
@@ -48,7 +53,7 @@ npx wrangler dev --remote
 ```
 
 **Note**: Without the `--remote` flag, the video will not actually be saved to the R2 bucket.  
-Run without the flag to test locally.
+Run without the flag if this is what you intend.
 
 ## Deployment
 

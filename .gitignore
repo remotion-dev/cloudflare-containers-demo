@@ -7,3 +7,4 @@ dist
 out
 .wrangler
 worker-configuration.d.ts
+build
