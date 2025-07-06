@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2018",
-    "module": "commonjs",
+    "module": "Node16",
     "jsx": "react-jsx",
     "strict": true,
     "noEmit": true,
     "lib": ["es2015"],
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "moduleResolution": "node16",
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true
   },

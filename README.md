@@ -1,4 +1,4 @@
-# Remotion video
+# Remotion on Cloudflare Workers
 
 <p align="center">
   <a href="https://github.com/remotion-dev/logo">
@@ -9,46 +9,49 @@
   </a>
 </p>
 
-Welcome to your Remotion project!
+A minimal Remotion server that runs on Cloudflare Containers.
 
-## Commands
+## Requirements
 
-**Install Dependencies**
+- You have a Cloudflare account.
+- You have enabled the Paid Workers plan (otherwise you'll get an "Unauthorized" error when running `wrangler deploy`).
+- You have signed in into the Wrangler CLI with `wrangler login`.
 
-```console
-bun install
+## Setup
+
+Step 1: Install dependencies
+
+```
+npm i
 ```
 
-**Start Preview**
+Step 2: Add your Cloudflare credentials to `wrangler.toml`:
 
-```console
-bun run dev
+```toml
+[vars]
+# Create a new R2 bucket in your Cloudflare account
+R2_BUCKET_NAME = "cloudflare-container-service"
+# How to find your Cloudflare account ID: https://developers.cloudflare.com/fundamentals/account/find-account-and-zone-ids/#users-with-a-single-account
+CLOUDFLARE_ACCOUNT_ID = "2fe488b3b0f4deee223aef7464784c46"
 ```
 
-**Render video**
+Step 3: Generate the types
 
-```console
-bunx remotion render
+```
+npx wrangler types
 ```
 
-**Upgrade Remotion**
+## Development
 
-```console
-bunx remotion upgrade
+```
+npx wrangler dev --remote
 ```
 
-## Docs
+**Note**: Without the `--remote` flag, the video will not actually be saved to the R2 bucket.  
+Run without the flag to test locally.
 
-Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
+## Deployment
 
-## Help
-
-We provide help on our [Discord server](https://discord.gg/6VzzNDwUwV).
-
-## Issues
-
-Found an issue with Remotion? [File an issue here](https://github.com/remotion-dev/remotion/issues/new).
-
-## License
-
-Note that for some entities a company license is needed. [Read the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
+```
+npx wrangler deploy
+```

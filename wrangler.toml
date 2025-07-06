@@ -1,0 +1,29 @@
+name = "remotion-renderer-service"
+compatibility_date = "2025-07-03"
+compatibility_flags = ["nodejs_compat"]
+main = "src/container.ts"
+
+[vars]
+R2_BUCKET_NAME = "cloudflare-container-service" # The name of your R2 bucket
+CLOUDFLARE_ACCOUNT_ID = "2fe488b3b0f4deee223aef7464784c46" # Find this in your Cloudflare dashboard
+
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "cloudflare-container-service"
+
+[[containers]]
+class_name = "RemotionContainer"
+image = "./Dockerfile"
+max_instances = 10
+instance_type = "standard"
+
+[[durable_objects.bindings]]
+name = "REMOTION_CONTAINER"  
+class_name = "RemotionContainer"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RemotionContainer"]
+
+[observability]
+enabled = true
