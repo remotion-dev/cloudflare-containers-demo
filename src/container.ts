@@ -53,7 +53,7 @@ export default {
         return Response.json({
           renderId,
           bucketName: env.R2_BUCKET_NAME,
-          publicUrl: `renders/${renderId}.mp4`,
+          key: `renders/${renderId}.mp4`,
         });
       }
 
